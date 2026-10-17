@@ -2,11 +2,16 @@
 <body>
 <script>
 const W="https://webhook.site/4870c85a-b9e2-4532-ac83-8c07bae03b80/";
-new Image().src=W+"?t2=start";
 addEventListener("pageshow", e => {
-  new Image().src = W + "?t2=pageshow&persisted=" + e.persisted;
+  new Image().src = W + "?evt=pageshow&persisted=" + e.persisted;
 });
-// go to edge dashboard, then come back — tests bfcache restore
-setTimeout(() => { location.href = "http://edge:8080/dashboard"; }, 1500);
-setTimeout(() => { history.back(); }, 4000);
+addEventListener("pagehide", e => {
+  new Image().src = W + "?evt=pagehide&persisted=" + e.persisted;
+});
+// navigate forward; the edge dashboard page will sit, then we rely on
+// the browser's own history. We trigger back via a popup-free timer that
+// survives by navigating to a data: URL we control instead of edge first.
+new Image().src = W + "?evt=load";
+setTimeout(() => { location.href = "http://edge:8080/dashboard"; }, 2000);
 </script>
+</body>
